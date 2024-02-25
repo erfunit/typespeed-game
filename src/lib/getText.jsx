@@ -1,0 +1,4 @@
+export const getText = () =>
+  `hello in this video we are going to talk about computer science gaming player person personality character open opportunitiy summer time sadness sad got think for ever song guy ladies better than job hug plus problem solving kiss before after arabic bottle mobile phone number headphone glasses notebook note mouse desktop directory wall picture engineer day night javascript nextjs and tailwindcss which are the most interesting words english concatinate embraces the programming language stylish boy that loves his girlfriend and is about to miss the gross misconception react library time coding typescript bootstrap php echo linux framework routine focus type speed fast faster die life death live open close monitor water laptop`
+    .split(" ")
+    .sort(() => Math.random() - 0.5);
