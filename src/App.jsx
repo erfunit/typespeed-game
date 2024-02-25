@@ -7,7 +7,7 @@ import LayoutContainer from "./components/LayoutContainer";
 import PlaygroundContainer from "./components/PlaygroundContainer";
 
 const App = () => {
-  const cloudRef = useRef(getText());
+  const [generatedText, setGeneratedText] = useState(getText());
   const inputRef = useRef(null);
   const [inputValue, setInputValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -33,7 +33,7 @@ const App = () => {
     if (value.endsWith(" ")) {
       const trimmedValue = value.trim();
       if (trimmedValue === "") return;
-      if (trimmedValue === cloudRef.current[selectedIndex]) {
+      if (trimmedValue === generatedText[selectedIndex]) {
         setCorrectWords((curr) => {
           return [...curr, selectedIndex];
         });
@@ -42,7 +42,7 @@ const App = () => {
       }
       setInputValue("");
       setSelectedIndex((curr) => curr + 1);
-      if (cloudRef.current.length - 1 === selectedIndex) {
+      if (generatedText.length - 1 === selectedIndex) {
         setIsEnded(true);
       }
     }
@@ -52,7 +52,7 @@ const App = () => {
     setIsEnded(false);
     setCorrectWords([]);
     setWrongWords([]);
-    cloudRef.current = getText();
+    setGeneratedText(getText());
     setTime(60);
     inputRef.current.focus();
     setGameStarted(true);
@@ -84,7 +84,7 @@ const App = () => {
           {time}s
         </span>
         <p className={time === 0 ? "opacity-40" : ""}>
-          {cloudRef.current.map((word, index) => (
+          {generatedText.map((word, index) => (
             <Word
               key={`${word}-${index}`}
               word={word}
@@ -99,7 +99,7 @@ const App = () => {
           <input
             ref={inputRef}
             autoFocus
-            placeholder={cloudRef.current[selectedIndex]}
+            placeholder={generatedText[selectedIndex]}
             value={inputValue}
             onChange={handleChange}
             className="focus:outline-none text-center w-full max-w-md border-b border-b-blue-500 p-2 my-4"
